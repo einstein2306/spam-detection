@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/static/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spam detection</title>
+    <style>
+        .head{
+            font-size:35px;
+            font-weight:900;
+        }
+        body{
+            background-color: whitesmoke;
+        }
+        #name{
+            font-weight:800;
+
+        }
+        #spam,#ham,#pred{
+            font-weight:700;
+        }
+        #pred{
+            color:saddlebrown;
+        }
+        .spam-div{
+            background-color:cornsilk;
+        }
+        .ham-div{
+            background-color:azure;
+        }
+        .pred-div{
+            background-color: beige;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row mb-5">
+            <p class="text-center mt-3 head">Spam Detection</p>
+            <hr>
+        </div>
+        {% if pred %}
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <table class="table table-sm text-center table-bordered shadow shadow-sm ">
+                    <thead class="table-dark">
+                        <th scope="col">Spam</th>
+                        <th scope="col">Not Spam</th>
+                        <th scope="col">Model Predicted</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="spam" class="text-danger">{{spam}}%</td>
+                            <td id="ham" class="text-success">{{ham}}%</td>
+                            <td id="pred">{{pred}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form action="/predict" method="post">
+                    <textarea autofocus class="form-control form-control-sm shadow shadow-sm" placeholder="place a message...." name="message"></textarea>
+                    <input type="submit" class="btn btn-dark btn-sm mt-3 w-100 shadow shadow-sm" value="predict">
+                </form>
+            </div>
+        </div>
+
+    
+    </div>
+
+</body>
+</html>
