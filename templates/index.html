@@ -3,6 +3,7 @@
 <head>
     <script src="/static/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <script src="/static/index.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>spam detection</title>
@@ -14,15 +15,13 @@
         body{
             background-color: whitesmoke;
         }
+
         #name{
             font-weight:800;
 
         }
         #spam,#ham,#pred{
             font-weight:700;
-        }
-        #pred{
-            color:saddlebrown;
         }
         .spam-div{
             background-color:cornsilk;
@@ -42,31 +41,31 @@
             <p class="text-center mt-3 head">Spam Detection</p>
             <hr>
         </div>
-        {% if pred %}
         <div class="row mb-4">
             <div class="col-md-6 mx-auto">
                 <table class="table table-sm text-center table-bordered shadow shadow-sm ">
                     <thead class="table-dark">
-                        <th scope="col">Spam</th>
-                        <th scope="col">Not Spam</th>
+                        <th scope="col">Spam (%)</th>
+                        <th scope="col">Not Spam (%)</th>
                         <th scope="col">Model Predicted</th>
+                        <th scope="col"></th>
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="spam" class="text-danger">{{spam}}%</td>
-                            <td id="ham" class="text-success">{{ham}}%</td>
-                            <td id="pred">{{pred}}</td>
+                            <td id="spam" class="text-danger">0%</td>
+                            <td id="ham" class="text-success">0%</td>
+                            <td id="pred" class="text-primary">----</td>
+                            <td><button class="btn btn-sm btn-secondary clear" onclick="clearData()" disabled>clear</button></td>
                         </tr>
                     </tbody>
                 </table>
                 
             </div>
         </div>
-        {% endif %}
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form action="/predict" method="post">
-                    <textarea autofocus class="form-control form-control-sm shadow shadow-sm" placeholder="place a message...." name="message"></textarea>
+                <form id="form">
+                    <textarea autofocus class="form-control form-control-sm shadow shadow-sm" placeholder="place a message...." id="message" required></textarea>
                     <input type="submit" class="btn btn-dark btn-sm mt-3 w-100 shadow shadow-sm" value="predict">
                 </form>
             </div>

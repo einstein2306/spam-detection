@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import joblib
 
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route('/predict', methods=['GET','POST'])
+@app.route('/predict', methods=['POST'])
 def prediction():
     if request.method == "POST":
         MESSAGE = request.form.get("message")
@@ -26,9 +26,13 @@ def prediction():
         else:
             pred = "spam"
 
-        return render_template("index.html",ham=ham,spam=spam,pred=pred)
 
-
+        return jsonify({
+            "success":True,
+            "spam":spam,
+            "ham":ham,
+            "pred":pred
+        })
 
 
 if __name__ == "__main__":
